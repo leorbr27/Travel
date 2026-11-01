@@ -1,6 +1,6 @@
 const { neon } = require("@neondatabase/serverless");
 function send(res,status,body){res.status(status).setHeader("Content-Type","application/json; charset=utf-8");res.setHeader("Cache-Control","no-store");return res.end(JSON.stringify(body));}
-function validDate(v){return typeof v==="string"&&/^\\d{4}-\\d{2}-\\d{2}$/.test(v)&&!Number.isNaN(Date.parse(v));}
+function validDate(v){return typeof v==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(v)&&!Number.isNaN(Date.parse(v));}
 module.exports=async function handler(req,res){
   if(!["GET","POST"].includes(req.method)){res.setHeader("Allow","GET, POST");return send(res,405,{error:"Método não permitido."});}
   if(!process.env.DATABASE_URL)return send(res,503,{error:"Banco Neon ainda não conectado. Configure DATABASE_URL como variável criptografada na Vercel."});
