@@ -1,20 +1,77 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102c3a"><meta name="description" content="Travel Intelligence — pesquisa inteligente de passagens e hospedagens."><title>Travel Intelligence</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="./styles.css"></head>
-<body><header class="topbar"><a class="brand" href="#"><span class="brand-mark">T</span><span>travel<span class="brand-light"> intelligence</span></span></a><span class="top-note"><i></i> Seu próximo destino começa aqui</span></header>
-<main><section class="hero"><div class="eyebrow"><span></span> PLANEJAMENTO INTELIGENTE DE VIAGENS</div><h1>Viajar melhor.<br><em>Gastando menos.</em></h1><p>Você define o destino, as datas e o orçamento. O Travel Intelligence organiza pesquisas de voos e hospedagens em fornecedores conhecidos e ajuda a comparar o custo total.</p><div class="hero-points"><span>✦ Pesquisas em fornecedores</span><span>✦ Voos + hospedagem</span><span>✦ Orçamento por pessoa e grupo</span></div></section>
-<section class="workspace"><div class="section-heading"><div><div class="eyebrow muted">SEU PLANEJAMENTO</div><h2>Para onde vamos?</h2></div><span class="step">01 <b>/</b> 01</span></div>
-<form id="trip-form"><div class="field-grid">
-<label class="field span-2"><span>Origem</span><input name="origin" value="Vitória (VIX), Brasil" required></label>
-<label class="field span-2"><span>Destino</span><input name="destination" placeholder="Cidade, país ou qualquer destino"><small>Deixe em branco para pesquisar a América do Sul.</small></label>
-<label class="field"><span>Ida</span><input name="departure" type="date" required></label><label class="field"><span>Volta</span><input name="return" type="date" required></label>
-<label class="field"><span>Viajantes</span><select name="travelers"><option value="1">1 pessoa</option><option value="2" selected>2 pessoas</option><option value="3">3 pessoas</option><option value="4">4 pessoas</option><option value="5">5 pessoas</option><option value="6">6 pessoas</option></select></label>
-<label class="field"><span>Orçamento por pessoa</span><div class="money-input"><b>R$</b><input name="budget" type="number" min="1" step="100" value="5000" required></div></label>
-<label class="field span-2"><span>Flexibilidade de aeroporto</span><select name="airportFlex"><option>Aceito outros aeroportos se a economia compensar</option><option>Somente o aeroporto de origem informado</option></select></label>
-<label class="field span-2"><span>Prioridade</span><select name="priority"><option>Menor custo total sem abrir mão de qualidade</option><option>Melhor equilíbrio entre preço e conforto</option><option>Menor tempo de deslocamento</option><option>Melhor hospedagem dentro do orçamento</option></select></label>
-</div><div class="budget-note"><span class="shield">✓</span><span>O teto é por pessoa. O painel também calcula o limite total do grupo. Tarifas e disponibilidade são consultadas nos sites dos fornecedores.</span></div><button class="search-button" type="submit"><span>Pesquisar minha viagem</span><span class="arrow">↗</span></button><p class="privacy-note">Sem reservas ou pagamentos. Você confirma a compra diretamente com o fornecedor.</p></form></section>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#073b73">
+<meta name="description" content="Travel Intelligence — encontre destinos, organize sua viagem e compare pesquisas de voos e hospedagens.">
+<title>Travel Intelligence | Sua próxima viagem começa aqui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#" aria-label="Travel Intelligence início"><span class="brand-mark">T</span><span>travel<span class="brand-light"> intelligence</span></span></a>
+  <nav class="main-nav" aria-label="Navegação principal">
+    <a href="#trip-search">Passagens</a><a href="#trip-search">Pacotes</a><a href="#trip-search">Hotéis</a><a href="#destinations">Destinos</a><a href="#history">Minhas viagens</a>
+  </nav>
+  <a class="header-cta" href="#trip-search">Planejar viagem <span>↗</span></a>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-shade"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow"><span></span> SUA PRÓXIMA VIAGEM COMEÇA AQUI</div>
+      <h1>O mundo espera<br>por <em>você.</em></h1>
+      <p>Descubra destinos, organize seu roteiro e compare opções de voos e hospedagens para viajar do seu jeito.</p>
+      <div class="hero-assurance"><span>✓ Planejamento simples</span><span>✓ Orçamento sob controle</span></div>
+    </div>
+  </div>
+</section>
+<section class="search-shell" id="trip-search">
+  <div class="search-tabs" aria-label="Tipo de pesquisa"><a class="active" href="#trip-search"><span>✈</span> Passagens + hospedagem</a><a href="#trip-search"><span>▣</span> Planejar viagem</a></div>
+  <div class="search-panel">
+    <div class="search-title"><div><span class="eyebrow muted">PLANEJE COM INTELIGÊNCIA</span><h2>Encontre sua próxima viagem</h2></div><span class="origin-tag">Origem padrão: Vitória (VIX)</span></div>
+    <form id="trip-form">
+      <div class="field-grid">
+        <label class="field"><span>De onde você vai sair?</span><input name="origin" value="Vitória (VIX), Brasil" required autocomplete="off"></label>
+        <label class="field"><span>Para onde você quer ir?</span><input name="destination" placeholder="Digite um destino ou deixe em branco" autocomplete="off"><small>Em branco: comparar 6 destinos da América do Sul.</small></label>
+        <label class="field"><span>Data de ida</span><input name="departure" type="date" required></label>
+        <label class="field"><span>Data de volta</span><input name="return" type="date" required></label>
+        <label class="field"><span>Viajantes</span><select name="travelers"><option value="1">1 pessoa</option><option value="2" selected>2 pessoas</option><option value="3">3 pessoas</option><option value="4">4 pessoas</option><option value="5">5 pessoas</option><option value="6">6 pessoas</option></select></label>
+        <label class="field"><span>Orçamento por pessoa</span><div class="money-input"><b>R$</b><input name="budget" type="number" min="1" step="100" value="5000" required></div></label>
+        <label class="field"><span>Aeroportos</span><select name="airportFlex"><option>Aceito outros aeroportos se a economia compensar</option><option>Somente o aeroporto de origem informado</option></select></label>
+        <label class="field"><span>O que é mais importante?</span><select name="priority"><option>Menor custo total sem abrir mão de qualidade</option><option>Melhor equilíbrio entre preço e conforto</option><option>Menor tempo de deslocamento</option><option>Melhor hospedagem dentro do orçamento</option></select></label>
+      </div>
+      <div class="form-bottom"><div class="budget-note"><span class="shield">✓</span><span>Veja o limite estimado para o grupo e compare o preço final diretamente nos fornecedores.</span></div><button class="search-button" type="submit"><span>Buscar viagem</span><span class="arrow">⌕</span></button></div>
+      <p class="privacy-note">Sem reservas ou pagamentos por aqui. Você confirma a compra diretamente com o fornecedor.</p>
+    </form>
+  </div>
+</section>
+<section class="destinations-section" id="destinations">
+  <div class="section-heading"><div><span class="eyebrow muted">INSPIRE-SE E DESCUBRA</span><h2>Destinos que combinam com você</h2><p>Escolha um destino para preencher sua pesquisa.</p></div><a href="#trip-search" class="text-link">Ver opções <span>→</span></a></div>
+  <div class="destination-grid">
+    <button class="destination-card buenos-aires" type="button" data-destination="Buenos Aires, Argentina"><span class="destination-overlay"></span><span class="destination-info"><small>ARGENTINA</small><strong>Buenos Aires</strong><span>Charme, cultura e gastronomia</span></span></button>
+    <button class="destination-card santiago" type="button" data-destination="Santiago, Chile"><span class="destination-overlay"></span><span class="destination-info"><small>CHILE</small><strong>Santiago</strong><span>Montanhas e experiências urbanas</span></span></button>
+    <button class="destination-card montevideo" type="button" data-destination="Montevidéu, Uruguai"><span class="destination-overlay"></span><span class="destination-info"><small>URUGUAI</small><strong>Montevidéu</strong><span>Ritmo leve à beira do Rio da Prata</span></span></button>
+    <button class="destination-card lima" type="button" data-destination="Lima, Peru"><span class="destination-overlay"></span><span class="destination-info"><small>PERU</small><strong>Lima</strong><span>Sabores e história</span></span></button>
+    <button class="destination-card bogota" type="button" data-destination="Bogotá, Colômbia"><span class="destination-overlay"></span><span class="destination-info"><small>COLÔMBIA</small><strong>Bogotá</strong><span>Arte, cultura e natureza</span></span></button>
+    <button class="destination-card assuncao" type="button" data-destination="Assunção, Paraguai"><span class="destination-overlay"></span><span class="destination-info"><small>PARAGUAI</small><strong>Assunção</strong><span>Uma escapada diferente</span></span></button>
+  </div>
+</section>
 <section id="history" class="results history-panel" hidden aria-live="polite">
   <div class="results-heading"><div><div class="eyebrow muted">MEMÓRIA DE VIAGENS</div><h2>Pesquisas recentes</h2></div><button id="refresh-history" class="history-refresh" type="button">Atualizar</button></div>
   <div id="history-list" class="history-list"><p class="history-empty">Carregando histórico…</p></div>
 </section>
-<section id="results" class="results" hidden aria-live="polite"><div class="results-heading"><div><div class="eyebrow muted">PESQUISAS PARA SUA VIAGEM</div><h2>Suas melhores opções</h2></div><span id="result-status" class="status">Preparando pesquisa</span></div><div id="result-summary" class="result-summary"></div><div id="result-content" class="result-content"></div><div id="sources" class="sources" hidden><h3>Fontes consultadas</h3><div id="source-list"></div></div><p class="disclaimer">O Travel Intelligence abre pesquisas diretamente nos fornecedores; não inventa nem garante tarifas. Compare preço final, bagagem, taxas, duração, cancelamento e disponibilidade antes de comprar. Nenhuma reserva ou pagamento é realizado aqui.</p></section></main>
-<footer><span class="brand small"><span class="brand-mark">T</span><span>travel<span class="brand-light"> intelligence</span></span></span><span>Planejamento mais inteligente. Viagens melhores.</span></footer><script src="./app.js" defer></script></body></html>
+<section id="results" class="results" hidden aria-live="polite">
+  <div class="results-heading"><div><div class="eyebrow muted">PESQUISAS PARA SUA VIAGEM</div><h2>Suas opções de viagem</h2></div><span id="result-status" class="status">Preparando pesquisa</span></div>
+  <div id="result-summary" class="result-summary"></div><div id="result-content" class="result-content"></div>
+  <div id="sources" class="sources" hidden><h3>Fornecedores para comparar</h3><div id="source-list"></div></div>
+  <p class="disclaimer">O Travel Intelligence abre pesquisas diretamente nos fornecedores; não inventa nem garante tarifas. Compare preço final, bagagem, taxas, duração, cancelamento e disponibilidade antes de comprar. Nenhuma reserva ou pagamento é realizado aqui.</p>
+</section>
+<section class="trust-strip"><div><b>✈</b><span><strong>Planeje com liberdade</strong><small>Escolha o destino e as datas</small></span></div><div><b>⌁</b><span><strong>Compare fornecedores</strong><small>Pesquisas em sites conhecidos</small></span></div><div><b>R$</b><span><strong>Controle seu orçamento</strong><small>Valores por pessoa e grupo</small></span></div></section>
+</main>
+<footer><span class="brand small"><span class="brand-mark">T</span><span>travel<span class="brand-light"> intelligence</span></span></span><span>Planejamento mais inteligente. Viagens melhores.</span></footer>
+<script src="./app.js" defer></script>
+</body></html>
