@@ -1,0 +1,12 @@
+{
+  "name": "travel-intelligence",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Travel Intelligence — pesquisa e planejamento de viagens",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2"
+  }
+}
