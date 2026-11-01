@@ -12,9 +12,16 @@ const refreshHistoryButton=document.querySelector("#refresh-history");
 const LOCAL_HISTORY_KEY="travel-intelligence-history-v1";
 
 const today=new Date();
-const minDate=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+const localISODate=date=>new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,10);
+const minDate=localISODate(today);
+const defaultDeparture=new Date(today);defaultDeparture.setDate(defaultDeparture.getDate()+30);
+const defaultReturn=new Date(defaultDeparture);defaultReturn.setDate(defaultReturn.getDate()+7);
 form.elements.departure.min=minDate;
 form.elements.return.min=minDate;
+// Preenche datas iniciais válidas para evitar o bloqueio do formulário quando o usuário toca em Buscar sem escolher datas.
+if(!form.elements.departure.value)form.elements.departure.value=localISODate(defaultDeparture);
+if(!form.elements.return.value)form.elements.return.value=localISODate(defaultReturn);
+form.elements.return.min=form.elements.departure.value;
 form.elements.departure.addEventListener("change",()=>{
   form.elements.return.min=form.elements.departure.value||minDate;
   if(form.elements.return.value&&form.elements.return.value<form.elements.departure.value)form.elements.return.value="";
