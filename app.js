@@ -114,3 +114,12 @@ form.addEventListener("submit",async event=>{
   }
 });
 loadHistory();
+
+document.querySelectorAll("[data-destination]").forEach(card=>{
+  card.addEventListener("click",()=>{
+    const destinationField=form.elements.destination;
+    destinationField.value=card.dataset.destination||"";
+    destinationField.focus({preventScroll:true});
+    document.querySelector("#trip-search").scrollIntoView({behavior:"smooth",block:"center"});
+  });
+});
