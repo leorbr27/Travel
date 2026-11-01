@@ -7,7 +7,7 @@ module.exports=async function handler(req,res){
   const sql=neon(process.env.DATABASE_URL);
   try{
     if(req.method==="GET"){
-      const rows=await sql.query("SELECT id,created_at,origin,destination,departure_date,return_date,travelers,budget_per_person,summary,report,sources FROM public.trip_searches ORDER BY created_at DESC LIMIT 30",[]);
+      const rows=await sql`SELECT id,created_at,origin,destination,departure_date,return_date,travelers,budget_per_person,summary,report,sources FROM public.trip_searches ORDER BY created_at DESC LIMIT 30`;
       return send(res,200,{items:rows});
     }
     const body=typeof req.body==="string"?JSON.parse(req.body):req.body||{};
@@ -19,7 +19,7 @@ module.exports=async function handler(req,res){
     const report=String(result.report||"").slice(0,60000),summary=String(result.summary||"").slice(0,1200);
     const sources=Array.isArray(result.sources)?result.sources.slice(0,50):[];
     if(!origin||!validDate(departure)||!validDate(returnDate)||returnDate<=departure||!Number.isInteger(travelers)||travelers<1||travelers>6||!Number.isFinite(budget)||budget<1||!report)return send(res,400,{error:"Dados da pesquisa incompletos ou inválidos."});
-    const saved=await sql.query("INSERT INTO public.trip_searches (origin,destination,departure_date,return_date,travelers,budget_per_person,request,summary,report,sources) VALUES ($1,$2,$3,$4,$5,$6,$7::jsonb,$8,$9,$10::jsonb) RETURNING id,created_at",[origin,destination,departure,returnDate,travelers,budget,JSON.stringify(request),summary,report,JSON.stringify(sources)]);
+    const saved=await sql`INSERT INTO public.trip_searches (origin,destination,departure_date,return_date,travelers,budget_per_person,request,summary,report,sources) VALUES (${origin},${destination},${departure},${returnDate},${travelers},${budget},${JSON.stringify(request)}::jsonb,${summary},${report},${JSON.stringify(sources)}::jsonb) RETURNING id,created_at`;
     return send(res,201,{saved:true,id:saved[0].id,created_at:saved[0].created_at});
   }catch(error){console.error("Travel history error:",error.message);return send(res,500,{error:"Não foi possível acessar o histórico de viagens."});}
 };
